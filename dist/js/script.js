@@ -47,8 +47,24 @@ darkToggle.addEventListener('click', function () {
 });
 
 // pindahkan posisi toggle sesuai mode
-if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+if (
+  localStorage.theme === 'dark' ||
+  (!('theme' in localStorage) &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches)
+) {
   darkToggle.checked = true;
 } else {
   darkToggle.checked = false;
 }
+
+//  handletombol kirim pesan ke wa
+const sendButton = document.querySelector('#send-to-wa');
+const messageInput = document.querySelector('#message-input');
+
+sendButton.addEventListener('click', () => {
+  const message = messageInput.value;
+  if (!message) return;
+
+  messageInput.value = '';
+  window.open(`https://wa.me/6282354566666?text=${message}`, '_blank').focus();
+});
